@@ -18,10 +18,10 @@ function includeFunctionsFolder(callback) {
     const cleanedAnswer = userAnswer.trim().toLowerCase();
     if (userAnswer === "y" || !userAnswer) {
       // do this
-      callback();
+      callback(true);
     } else if (userAnswer === "n") {
       // do this
-      callback();
+      callback(false);
     } else {
       includeFunctionsFolder(callback);
     }
@@ -39,7 +39,23 @@ app.question("Name of project:", function (projectName) {
     fs.mkdirSync(projectDirectory);
   }
 
-  includeFunctionsFolder(function () {
+  includeFunctionsFolder(function (makeFunctionsFolder) {
+    if (makeFunctionsFolder) {
+      fs.mkdirSync(functionsDirectory);
+
+      const webfileLibRef = path.join(__dirname, "lib/webfile.js");
+      fs.writeFileSync(
+        path.join(functionsDirectory, "webfile.js"),
+        fs.readFileSync(webfileLibRef)
+      );
+
+      const serverLibRef = path.join(__dirname, "lib/server.js");
+      fs.writeFileSync(
+        path.join(projectDirectory, "server.js"),
+        fs.readFileSync(serverLibRef)
+      );
+    }
+
     fs.writeFileSync(readmeFile, "## Project Name");
     quitApp();
   });
