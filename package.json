@@ -1,0 +1,25 @@
+{
+  "name": "sp25-create-tyapp",
+  "version": "0.5.0",
+  "bin": {
+    "create-tyapp": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "readme.md",
+    "templates",
+    "lib/"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "fs": "node fs",
+    "path": "node path",
+    "start": "node index.js",
+    "test": "TEST=1 node ./",
+    "win-test": "set TEST=1 && node ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
